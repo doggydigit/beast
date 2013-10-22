@@ -109,30 +109,23 @@ void VueOpenGL::dessine(wxPaintEvent& event)
 	*/
 	
 	
-	glPushMatrix();
-	//Dessin de la planète bleue ici
-	glColor4d(0.0, 0.0, 1.0, 1.0);
-    GLUquadric* quadrique=gluNewQuadric();
+	GLUquadric* quadrique=gluNewQuadric();
+ 
+    glPushMatrix();
+    // le repère d'origine subit une translation
+    glTranslated(20.0, 20.0, 10.0);
+    glColor4d(0.0, 0.0, 1.0, 1.0);
     gluQuadricDrawStyle(quadrique, GLU_LINE);
-    gluSphere(quadrique, 1, 20, 20);
-	gluDeleteQuadric(quadrique);
-	
-	glRotated(-(90-1),0,0,1);
-	glTranslated(0,20,0);
-	//Dessin de la planète verte ici
-	glColor4d(0.0, 1.0, 1.0, 0.0);
+    gluSphere(quadrique, 10, 20, 20);
+    // retour au contexte précédent
+    // donc au repère d'origine
+    glPopMatrix();
+    glColor4d(0.0, 1.0, 1.0, 1.0);
     gluQuadricDrawStyle(quadrique, GLU_LINE);
-    gluSphere(quadrique, 1, 20, 20);
-	gluDeleteQuadric(quadrique);
-	
-	glRotated(-(90-1),0,0,1);
-	glTranslated(0,10,0);
-	//Dessin de la planète orange ici
-	glColor4d(1.0, 1.0, 0.0, 0.0);
-    gluQuadricDrawStyle(quadrique, GLU_LINE);
-    gluSphere(quadrique, 1, 20, 20);
-	gluDeleteQuadric(quadrique);
-	glPopMatrix()
+    gluSphere(quadrique, 10, 20, 20);
+    glPopMatrix();
+      
+    gluDeleteQuadric(quadrique);
 	
 	
 	
