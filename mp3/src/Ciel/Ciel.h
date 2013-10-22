@@ -8,9 +8,10 @@ class Ciel
 	public:
 		Ciel();
 		void dessine(wxPaintEvent& event);
+		void rotation();
 
 	private:
-
+		double angle;
 		
 };
 #endif

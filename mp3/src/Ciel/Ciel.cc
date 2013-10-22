@@ -11,3 +11,8 @@ void Ciel::dessine(wxPaintEvent& event)
 	
 	gluDeleteQuadric(quadrique);
 }
+
+void Ciel::rotation()
+{
+	angle += 0.02;
+}

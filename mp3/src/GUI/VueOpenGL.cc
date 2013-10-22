@@ -108,6 +108,8 @@ void VueOpenGL::dessine(wxPaintEvent& event)
 	glEnd();
 	*/
 	
+	
+	/*
 	GLUquadric* quadrique=gluNewQuadric();
 	
 	glPushMatrix();
@@ -130,7 +132,7 @@ void VueOpenGL::dessine(wxPaintEvent& event)
 	gluSphere(quadrique, 10, 20, 20);
 	//Dessin de la planète orange ici
 	glPopMatrix();
-	
+	*/
 	
 	
 	wxGetApp().dessine(event);
