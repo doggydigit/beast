@@ -1,0 +1,22 @@
+import os
+ 
+def addTarget(name, srcs, a=0):
+    env.Alias(name, env.Program(target = os.path.join("../bin/", name), source = srcs), a)
+ 
+env = Environment(CXXFLAGS = "-g -std=c++0x")
+ 
+env["CXX"] = "g++-4.6"
+env.ParseConfig('wx-config --cxxflags --libs gl,core,base')
+env.Append(LIBS=['GL','GLU', 'glut'])
+ 
+#Parties
+ 
+GUI=Glob('GUI/*.cc')
+
+Telescope=Glob("Telescope/*.cc") 
+ 
+parts=[GUI, Telescope]
+ 
+#Cibles
+Application=Glob("tests/application.cc")
+addTarget("application", parts)
