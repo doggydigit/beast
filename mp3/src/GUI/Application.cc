@@ -19,6 +19,7 @@ bool Application::OnInit()
 void Application::dessine(wxPaintEvent& event)
 {
 	telescope.dessine(event);
+	ciel.dessine(event);
 }
 
 

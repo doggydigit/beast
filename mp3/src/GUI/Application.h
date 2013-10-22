@@ -4,6 +4,7 @@
 #include "wxIncludes"
 #include "FenetreGL.h"
 #include "../Telescope/Telescope.h"
+#include "../Ciel/Ciel.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ class Application: public wxApp
 		bool OnInit();
 		FenetreGL* fenetreGL;
 		Telescope telescope;
+		Ciel ciel;
 		
 };
 DECLARE_APP(Application);

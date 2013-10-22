@@ -14,8 +14,10 @@ env.Append(LIBS=['GL','GLU', 'glut'])
 GUI=Glob('GUI/*.cc')
 
 Telescope=Glob("Telescope/*.cc") 
+
+Ciel=Glob("Ciel/*.cc") 
  
-parts=[GUI, Telescope]
+parts=[GUI, Telescope, Ciel]
  
 #Cibles
 Application=Glob("tests/application.cc")
