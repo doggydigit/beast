@@ -7,7 +7,8 @@ int VueOpenGL::attributelist[3] = {WX_GL_DEPTH_SIZE,16,0};
 VueOpenGL::VueOpenGL(wxWindow* parent, wxSize const& taille, wxPoint const& position)
 :wxGLCanvas(parent, wxID_ANY, position, taille, wxSUNKEN_BORDER, wxT(""), VueOpenGL::attributelist)
 {
-	/*wxImageHandler * jpegLoader = new wxJPEGHandler();
+	/*
+	wxImageHandler * jpegLoader = new wxJPEGHandler();
 	wxImage::AddHandler(jpegLoader);
 	wxBitmap bitmap;
 	wxString string = "texture/click.jpeg"
@@ -18,7 +19,8 @@ VueOpenGL::VueOpenGL(wxWindow* parent, wxSize const& taille, wxPoint const& posi
 	cursor = bitmap.ConvertToImage();
     wx.SetCursor(wx.CursorFromImage(cursor));*/
     Connect(wxEVT_PAINT, wxPaintEventHandler(VueOpenGL::dessine)); // a definir???
-    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(VueOpenGL::appuiTouche));
+    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler
+(VueOpenGL::appuiTouche));
     Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(VueOpenGL::mouseDown));
     Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(VueOpenGL::mouseUp));
 }
@@ -162,16 +164,34 @@ void VueOpenGL::dessine(wxPaintEvent& event)
 
 void VueOpenGL::dessineSol(double taille)
 {
+	glEnable(GL_TEXTURE_2D);
+	GLUquadric* quadrique=gluNewQuadric();
+	glColor4d(255.0, 255.0, 255.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("res/sol.jpg"));
 	
+	gluQuadricDrawStyle(quadrique, GLU_FILL);
+	gluQuadricTexture(quadrique,GL_TRUE);
+	glTranslated(0, 0.0, -100.0);
+	gluSphere(quadrique, 100, 20, 20);
+	
+	gluDeleteQuadric(quadrique);
+	/*
+	glEnable(GL_TEXTURE_2D);
+	
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("res/sol.jpg"));
 	glBegin(GL_QUADS);
- 
-	glColor3ub(255,0,0);
+	glColor3ub(255,255,255);
+	glTexCoord2d(0,0);
 	glVertex3d(-taille,-taille,0);
+	glTexCoord2d(1,0);
 	glVertex3d(-taille,taille,0);
+	glTexCoord2d(1,1);
 	glVertex3d(taille,taille,0);
+	glTexCoord2d(0,1);
 	glVertex3d(taille,-taille,0);
  
-glEnd();
+glEnd();*/
+glDisable(GL_TEXTURE_2D);
 }
 
 void VueOpenGL::appuiTouche(wxKeyEvent& event)
@@ -208,7 +228,6 @@ void VueOpenGL::appuiTouche(wxKeyEvent& event)
 
 void VueOpenGL::mouseDown(wxMouseEvent& event)
 {
-	cout << "mousedoiwn" << endl;
 	mx = event.GetX();
 	my = event.GetY();
 	Connect(wxEVT_MOTION, wxMouseEventHandler(VueOpenGL::mouseMove));
@@ -217,12 +236,10 @@ void VueOpenGL::mouseDown(wxMouseEvent& event)
 void VueOpenGL::mouseUp(wxMouseEvent& event)
 {
 	Disconnect(wxEVT_MOTION, wxMouseEventHandler(VueOpenGL::mouseMove));
-	cout << "mousupè" << endl;
 }
 
 void VueOpenGL::mouseMove(wxMouseEvent& event)
 {
-	cout << "mousemove" << endl;
 	camera.setHori(camera.getHori() + 0.01*(mx - event.GetX()));
 	camera.setVerti(camera.getVerti() + 0.01*(my - event.GetY()));
 	mx = event.GetX();

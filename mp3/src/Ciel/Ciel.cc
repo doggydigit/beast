@@ -9,10 +9,13 @@ Ciel::Ciel():vitesse(0.02)
 void Ciel::dessine(wxPaintEvent& event)
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("GUI/texture/sol.jpg"));
 	GLUquadric* quadrique=gluNewQuadric();
-	gluQuadricDrawStyle(quadrique, GLU_LINE);
-	gluSphere(quadrique, 200, 20, 20);
+	glColor4d(255.0, 255.0, 255.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("res/sky1.jpg"));
+	
+	gluQuadricDrawStyle(quadrique, GLU_FILL);
+	gluQuadricTexture(quadrique,GL_TRUE);
+	gluSphere(quadrique, 800, 20, 20);
 	
 	gluDeleteQuadric(quadrique);
 }
