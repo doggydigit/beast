@@ -1,9 +1,14 @@
 #include "Application.h"
-/*
-Application::Application(){}
 
-Application::~Application(){}
-*/
+Application::Application()
+{
+	timer=new wxTimer(this);
+	timer->Start(50);
+	Connect(wxEVT_TIMER, wxTimerEventHandler(Application::rotateSky));
+}
+
+//Application::~Application(){}
+
 bool Application::OnInit()
 {
     //On alloue la fenêtre
@@ -26,6 +31,16 @@ void Application::dessine(wxPaintEvent& event)
 GLuint* Application::getTexture(string fichier, bool mipmap)
 {
     return texturemanager.getTexture(fichier, mipmap);
+}
+
+void Application::rotateSky(wxTimerEvent& event)
+{
+	ciel.rotation();
+	fresh();
+}
+
+void Application::fresh(){
+	fenetreGL->rafraichir();
 }
 
 //Remplacement du main

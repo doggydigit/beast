@@ -1,13 +1,14 @@
 #include "Ciel.h"
 #include "../GUI/Application.h"
 
-Ciel::Ciel():vitesse(0.02)
+Ciel::Ciel():vitesse(2)
 {
 	//setTexture("sol.jpg");
 }
 
 void Ciel::dessine(wxPaintEvent& event)
 {
+	glRotated(-angle,0,0,1);
 	glEnable(GL_TEXTURE_2D);
 	GLUquadric* quadrique=gluNewQuadric();
 	glColor4d(255.0, 255.0, 255.0, 0.0);

@@ -190,8 +190,9 @@ void VueOpenGL::dessineSol(double taille)
 	glTexCoord2d(0,1);
 	glVertex3d(taille,-taille,0);
  
-glEnd();*/
-glDisable(GL_TEXTURE_2D);
+	glEnd();
+	*/
+	glDisable(GL_TEXTURE_2D);
 }
 
 void VueOpenGL::appuiTouche(wxKeyEvent& event)
