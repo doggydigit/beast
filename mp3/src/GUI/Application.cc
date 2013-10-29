@@ -1,6 +1,7 @@
 #include "Application.h"
 /*
 Application::Application(){}
+
 Application::~Application(){}
 */
 bool Application::OnInit()
@@ -22,6 +23,10 @@ void Application::dessine(wxPaintEvent& event)
 	ciel.dessine(event);
 }
 
+GLuint* Application::getTexture(string fichier, bool mipmap)
+{
+    return texturemanager.getTexture(fichier, mipmap);
+}
 
 //Remplacement du main
 IMPLEMENT_APP(Application);

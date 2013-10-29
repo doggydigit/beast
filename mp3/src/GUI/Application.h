@@ -5,6 +5,7 @@
 #include "FenetreGL.h"
 #include "../Telescope/Telescope.h"
 #include "../Ciel/Ciel.h"
+#include "TextureManager.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ class Application: public wxApp
 		~Application();
 	*/	
 		void dessine(wxPaintEvent& event);
+		GLuint* getTexture(string fichier, bool mipmap=true);
 		
 	private:
 	
@@ -23,6 +25,7 @@ class Application: public wxApp
 		FenetreGL* fenetreGL;
 		Telescope telescope;
 		Ciel ciel;
+		TextureManager texturemanager;
 		
 };
 DECLARE_APP(Application);

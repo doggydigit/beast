@@ -1,10 +1,15 @@
 #include "Ciel.h"
+#include "../GUI/Application.h"
 
-Ciel::Ciel()
-{}
+Ciel::Ciel():vitesse(0.02)
+{
+	//setTexture("sol.jpg");
+}
 
 void Ciel::dessine(wxPaintEvent& event)
 {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("GUI/texture/sol.jpg"));
 	GLUquadric* quadrique=gluNewQuadric();
 	gluQuadricDrawStyle(quadrique, GLU_LINE);
 	gluSphere(quadrique, 200, 20, 20);
@@ -14,5 +19,10 @@ void Ciel::dessine(wxPaintEvent& event)
 
 void Ciel::rotation()
 {
-	angle += 0.02;
+	angle += vitesse;
+}
+void Ciel::setTexture(string texture)
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture(texture));
 }

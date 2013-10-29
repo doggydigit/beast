@@ -2,6 +2,8 @@
 #define CIEL_H
 
 #include "../GUI/wxIncludes"
+#include <string>
+using namespace std;
 
 class Ciel
 {
@@ -9,9 +11,11 @@ class Ciel
 		Ciel();
 		void dessine(wxPaintEvent& event);
 		void rotation();
+		void setTexture(string texture);
 
 	private:
 		double angle;
-		
+		double vitesse;
+		string texture;
 };
 #endif

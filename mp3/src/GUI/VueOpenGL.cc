@@ -7,11 +7,28 @@ int VueOpenGL::attributelist[3] = {WX_GL_DEPTH_SIZE,16,0};
 VueOpenGL::VueOpenGL(wxWindow* parent, wxSize const& taille, wxPoint const& position)
 :wxGLCanvas(parent, wxID_ANY, position, taille, wxSUNKEN_BORDER, wxT(""), VueOpenGL::attributelist)
 {
+	/*wxImageHandler * jpegLoader = new wxJPEGHandler();
+	wxImage::AddHandler(jpegLoader);
+	wxBitmap bitmap;
+	wxString string = "texture/click.jpeg"
+	if(!(bitmap.LoadFile(string, wxBITMAP_TYPE_JPEG)))
+	{
+		cout << "fail" << endl;
+	} 
+	cursor = bitmap.ConvertToImage();
+    wx.SetCursor(wx.CursorFromImage(cursor));*/
     Connect(wxEVT_PAINT, wxPaintEventHandler(VueOpenGL::dessine)); // a definir???
+    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(VueOpenGL::appuiTouche));
+    Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(VueOpenGL::mouseDown));
+    Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(VueOpenGL::mouseUp));
 }
 
 void VueOpenGL::InitOpenGL()
 {
+	/*
+	cout << wxMouseEvent::GetPosition(mx,my) << endl;
+	cout << wxMouseEvent::GetWheelRotation() << endl;
+	*/
 	//indique que les instructions OpenGL s'adressent au contexte
 	// OpenGL courant
 	SetCurrent();
@@ -53,7 +70,7 @@ void VueOpenGL::dessine(wxPaintEvent& event)
     dessineSol(100);
      
     //Commandes de dessin ici
-    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(VueOpenGL::appuiTouche));
+    
     
     /*
      * SPhere
@@ -145,13 +162,14 @@ void VueOpenGL::dessine(wxPaintEvent& event)
 
 void VueOpenGL::dessineSol(double taille)
 {
+	
 	glBegin(GL_QUADS);
  
 	glColor3ub(255,0,0);
-	glVertex3d(0,0,0);
-	glVertex3d(100,0,0);
-	glVertex3d(100,100,0);
-	glVertex3d(0,100,0);
+	glVertex3d(-taille,-taille,0);
+	glVertex3d(-taille,taille,0);
+	glVertex3d(taille,taille,0);
+	glVertex3d(taille,-taille,0);
  
 glEnd();
 }
@@ -186,4 +204,28 @@ void VueOpenGL::appuiTouche(wxKeyEvent& event)
             break;
     }
     Refresh(false);
+}
+
+void VueOpenGL::mouseDown(wxMouseEvent& event)
+{
+	cout << "mousedoiwn" << endl;
+	mx = event.GetX();
+	my = event.GetY();
+	Connect(wxEVT_MOTION, wxMouseEventHandler(VueOpenGL::mouseMove));
+}
+
+void VueOpenGL::mouseUp(wxMouseEvent& event)
+{
+	Disconnect(wxEVT_MOTION, wxMouseEventHandler(VueOpenGL::mouseMove));
+	cout << "mousupè" << endl;
+}
+
+void VueOpenGL::mouseMove(wxMouseEvent& event)
+{
+	cout << "mousemove" << endl;
+	camera.setHori(camera.getHori() + 0.01*(mx - event.GetX()));
+	camera.setVerti(camera.getVerti() + 0.01*(my - event.GetY()));
+	mx = event.GetX();
+	my = event.GetY();
+	Refresh(false);
 }
