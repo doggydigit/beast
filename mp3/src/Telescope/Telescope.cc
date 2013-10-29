@@ -6,59 +6,78 @@ Telescope::Telescope()
 
 void Telescope::dessine(wxPaintEvent& event)
 {
-	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
 	GLUquadric* quadrique=gluNewQuadric();
-	glColor4d(255.0, 255.0, 255.0, 0.0);
-	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("res/metal.jpg"));
-	gluQuadricTexture(quadrique,GL_TRUE);
+
 	glTranslated(0, 0.0, 100.0);
 	
-	glPushMatrix();
-	
-	gluCylinder(quadrique, 1.75, 1.75, 1, 20, 20);
-	
-	gluDisk(quadrique, 0.0, 1.75, 30, 1);
+	glTranslated(0,0,9);
+	glColor4d(255.0, 255.0, 255.0, 0.0);
+	gluQuadricTexture(quadrique,GL_TRUE);
+	gluSphere(quadrique, 10, 20, 20);
 
-	glPopMatrix();
+	glTranslated(0,0,15);
+	gluSphere(quadrique, 7, 20, 20);
+	
+	glTranslated(0,0,10);
+	gluSphere(quadrique, 5, 20, 20);
+	
+	glTranslated(0,0,4);
+	glColor4d(0,0,0,0);
+	gluDisk(quadrique, 0.0, 6, 30, 1);
+	gluCylinder(quadrique, 3, 3, 4, 20, 20);
+	
+	glTranslated(0,0,4);
+	gluDisk(quadrique, 0.0, 3, 30, 1);
+	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, *wxGetApp().getTexture("res/metal.jpg"));
+	glColor4d(255.0, 255.0, 255.0, 0.0);
+	
+	glTranslated(5*cos(a),5*sin(a),-5.5);
+	glRotated(90+b,0,1,0);
+	//glRotated(a*360/6,0,0,1);
+	gluCylinder(quadrique, 1.75, 1.75, 1, 20, 20);
+	gluDisk(quadrique, 0.0, 1.75, 30, 1);
+	//glPopMatrix();
 
 	glTranslated(0, 0.0, 1.0);
 	gluCylinder(quadrique, 1, 1, 4, 20, 20);
 	gluDisk(quadrique, 0.9, 1.75, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 4.0);
 	gluCylinder(quadrique, 1.75, 1.75, 3.0, 20, 20);
 	gluDisk(quadrique, 0.9, 1.75, 30, 1);
-	glPopMatrix();
 	
 	glTranslated(0, 0.0, 3.0);
 	gluCylinder(quadrique, 2.75, 2.75, 5, 20, 20);
 	gluDisk(quadrique, 1.74, 2.75, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 5.0);
 	gluCylinder(quadrique, 4.25, 4.25, 7.5, 20, 20);
 	gluDisk(quadrique, 2.74, 4.25, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 7.50);
 	gluCylinder(quadrique, 5.75, 5.75, 11, 20, 20);
 	gluDisk(quadrique, 4.24, 5.75, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 11.0);
 	gluCylinder(quadrique, 7, 7, 11, 20, 20);
 	gluDisk(quadrique, 5.74, 7, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 11.0);
 	gluCylinder(quadrique, 9, 9, 14, 20, 20);
 	gluDisk(quadrique, 6.9, 9, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glTranslated(0, 0.0, 14.0);
 	gluDisk(quadrique, 7, 9, 30, 1);
-	glPopMatrix();
+	//glPopMatrix();
 	
 	glEnable(GL_CLIP_PLANE0);
 	double d[4]={0,0,1,-7.5};
@@ -66,9 +85,12 @@ void Telescope::dessine(wxPaintEvent& event)
 	glColor4d(0.0, 0.0, 0.0, 0.0);
 	gluSphere(quadrique, 10.5, 20, 20);
 	glClipPlane(GL_CLIP_PLANE0, d);
-	glPopMatrix();
+	//glPopMatrix();
 	glDisable(GL_CLIP_PLANE0);
-
+	
+	//glRotated(90-b,0,-1,0);
+	//glRotated(a*360/6,0,0,1);
+	glPopMatrix();
 	gluDeleteQuadric(quadrique);
 	glDisable(GL_TEXTURE_2D);
 	
@@ -121,3 +143,31 @@ void Telescope::dessine(wxPaintEvent& event)
 		glPopMatrix();
 	}*/
 }
+
+void Telescope::rotateA(double x)
+{
+	a += x;
+}
+
+void Telescope::rotateB(double x)
+{
+	if(b<=40 && b>=-220)
+	{
+		b += x;
+		cout << b<<endl;
+	}else if(b>40)
+	{
+		b = 39;
+	}else if(b<-220)
+	{
+		b = -219;
+	}
+}
+
+
+
+
+
+
+
+

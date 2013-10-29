@@ -6,7 +6,7 @@
 class Camera
 {
 	public:
-		Camera(double R = 200 , double H = 0.7, double V = 1);
+		Camera(double R = 100 , double H = 0.7, double V = 1);
 		
 		void setVue();
 		

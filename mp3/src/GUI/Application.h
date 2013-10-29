@@ -21,6 +21,9 @@ class Application: public wxApp
 	private:
 		void rotateSky(wxTimerEvent& event);
 		void fresh();
+		void mouseDown(wxMouseEvent& event);
+		void mouseUp(wxMouseEvent& event);
+		void mouseMove(wxMouseEvent& event);
 	
 		bool OnInit();
 		FenetreGL* fenetreGL;
@@ -28,6 +31,8 @@ class Application: public wxApp
 		Ciel ciel;
 		TextureManager texturemanager;
 		wxTimer* timer;
+		double mx;
+		double my;
 		
 };
 DECLARE_APP(Application);

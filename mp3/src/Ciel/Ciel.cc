@@ -1,7 +1,7 @@
 #include "Ciel.h"
 #include "../GUI/Application.h"
 
-Ciel::Ciel():vitesse(2)
+Ciel::Ciel():vitesse(0.5)
 {
 	//setTexture("sol.jpg");
 }

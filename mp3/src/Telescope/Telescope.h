@@ -8,8 +8,11 @@ class Telescope
 	public:
 		Telescope();
 		void dessine(wxPaintEvent& event);
-
-	private:
+		void rotateA(double x);
+		void rotateB(double x);
+	
+		double a;
+		double b;
 
 		
 };
