@@ -1,0 +1,49 @@
+<Parameters>
+
+<Map>
+<Parameter name="Flower_density">0.05</Parameter> <!- Probabilité qu'une case herbeuse contienne une fleur -!>
+</Map>
+
+<Flower>
+<Parameter name="Nectar">1000</Parameter>
+</Flower>
+
+<Hive>
+<Parameter name="Max_percentage_honey_given">0.2</Parameter> <!- Pourcentage maximal du miel stocké pouvant être donné comme nourriture à un abeille -!>
+<Parameter name="WB_ratio">0.2</Parameter> <!- Probabilité qu'une abeille générée soit une WorkingBee -!>
+<Parameter name="Initial_honey">10000</Parameter> <!- Quantité initiale de miel -!>
+</Hive>
+
+<Bee>
+<Parameter name="Randommove_change_direction">0.25</Parameter> <!- Probabilité qu'une abeille change de direction en mode RANDOM -!>
+<Parameter name="Randommove_angle_sigma">0.2</Parameter> <!- L'angle qui donne le changement de direction suit une loi N(0,sigma) -!>
+<Parameter name="Threshold_Feed">1000</Parameter> <!- Seuil pour se nourrir à la ruche -!>
+</Bee>
+
+<ScoutingBee>
+<Parameter name="Energy_loss_per_move">1</Parameter> <!- Quantité d'énergie perdue par mouvement -!>
+<Parameter name="FOV">1.22</Parameter> <!- Champ de vision (angle) -!>
+<Parameter name="DOV">2</Parameter> <!- Distance de vision -!>
+<Parameter name="Energy_to_quit">200</Parameter> <!- Energie minimale pour quitter la ruche -!>
+<Parameter name="Init_energy_mu">1000</Parameter> <!- L'énergie initiale de l'abeille suit une loi N(mu,sigma) -!>
+<Parameter name="Init_energy_sigma">100</Parameter> <!- L'énergie initiale de l'abeille suit une loi N(mu,sigma) -!>
+
+<Parameter name="Percentage_low_energy">70</Parameter> <!-Pourcentage de l'énergie dépensée depuis le départ de la ruche qui doit rester comme énergie, sans quoi l'abeille tente de rentrer à la ruche -!>
+<Parameter name="Seeking_speed">8</Parameter>
+<Parameter name="Max_transmit">10</Parameter> <!- Maximum d'abeilles a qui la position d'une fleur est transmise -!>
+</ScoutingBee>
+
+<WorkingBee>
+<Parameter name="Energy_loss_per_move">1</Parameter> <!- Quantité d'énergie perdue par mouvement -!>
+<Parameter name="FOV">1.22</Parameter> <!- Champ de vision (angle) -!>
+<Parameter name="DOV">2</Parameter> <!- Distance de vision -!>
+<Parameter name="Energy_to_quit">200</Parameter> <!- Energie minimale pour quitter la ruche -!>
+<Parameter name="Init_energy_mu">1000</Parameter> <!- L'énergie initiale de l'abeille suit une loi N(mu,sigma) -!>
+<Parameter name="Init_energy_sigma">100</Parameter> <!- L'énergie initiale de l'abeille suit une loi N(mu,sigma) -!>
+
+<Parameter name="Max_nectar">200</Parameter> <!- Maximum de nectar transportable -!>
+<Parameter name="Nectar_collected_per_iteration">10</Parameter> <!- Nectar pris de la fleur par itération -!>
+<Parameter name="Nectar_given_per_iteration">1</Parameter> <!- Nectar donné à la ruche par itération -!>
+</WorkingBee>
+
+</Parameters>
