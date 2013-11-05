@@ -10,17 +10,23 @@ using namespace std;
 class Flowers : public Dessinable, Positionnable 	//vérifier
 {
     public :
+	//constructor, destructor
+	Flowers(Position P, int N);
+	~Flowers();
+
 	//getters
-	//Position getPos();
+	Position getPos();
 	int getQuantNec();
+
+	//function : gather pollen
 	int GatherNec(int m);
 
     private :
 	//position
-	//Position pos;
+	Position pos;
 	
 	//quantité nectar
-	int quant_nect(1000);
+	int quant_nect;
 
 };
 #endif
