@@ -41,7 +41,7 @@ class Application : public wxApp
 		void reload();
 		
 	private:
-	
+		
 		bool OnInit();
 		
 		TextureManager texturemanager;

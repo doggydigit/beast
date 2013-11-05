@@ -1,6 +1,7 @@
 #include "Map.h"
+#include "../GUI/Application.h"
 
-Map::Map(int a,int b, int c): taillePlan(a), taillePerlin(b), resolution(c)
+Map::Map(int a,int b, int c): taillePlan(a), taillePerlin(b), resolution(c), Mode(d)
 {
 	displayList=glGenLists(1);
 	setCases();
@@ -16,40 +17,73 @@ Map::~Map()
 
 void Map::draw()
 {
-	glCallList(displayList);
-	/*
-	utils::RendererImage renderer;
-	utils::Image image;
-	renderer.SetSourceNoiseMap (heightMap);
-	renderer.SetDestImage (image);
-	renderer.Render ();
-	* */
+	switch(mode)
+	{
+		case texture:
+
+			break;
+		
+		case color:
+	
+			glColor3ub(255,255,255);
+			glEnable(GL_TEXTURE_2D);
+			// texture est un GLuint
+			glBindTexture(GL_TEXTURE_2D, texture);
+			
+			// dessin du plan ici
+			
+			glDisable(GL_TEXTURE_2D);
 }
 
 void Map::setDisplayList()
 {
-	glNewList(displayList, GL_Compile);
+	switch(mode)
+	{
+		case texture:
 	
-		glBegin(GL_QUADS);
+			glNewList(displayList, GL_Compile);
+			glColor3ub(255,255,255);
+			glEnable(GL_TEXTURE_2D);
+			
+				glBegin(GL_QUADS);
+				
+				int y[cases0];
+				for(int i(0); i < cases; ++i)
+				{
+					int y[i] = i*resolution
+					for(int i(0); i < cases; ++i)
+					{
+						int x = i*resolution;
+						for(int j(0); j < cases; ++j)
+						{
+							VecnD c(x,y[i], heightMap[i][j]);
+							switch (Mode)
+							{
+								case texture:
+									glColor3ub(255,255,255);
+									glBindTexture(GL_TEXTURE_2D, choseTexture(*heightMap[i][j]));
+								break;
+									
+								case color:
+									choseColor(*heightMap[i][j]);
+								break;
+							}
+							Utilities::drawCube(c, resolution, 4);
+						}
+					}
+				}
+				glEnd();
+				
+			glEndList();
 		
-		int y[cases0];
-		for(int i(0); i < cases; ++i)
-		{
-			int y[i] = i*resolution
-		for(int i(0); i < cases; ++i)
-		{
-			int x = i*resolution;
-			for(int j(0); j < cases; ++j)
-			{
-				VecnD c(x,y[i], heightMap[i][j]);
-				Utilities::drawCube(c, resolution, 4);
-			}
-		}
-		Utilities::GLTextureFromElevations(heightMap, 
-		glEnd();
-		
-	glEndList();
+			break;
+			
+		case color:
+			//idsasfhergbhe34ht79133eqhg
+		break;
+	}
 }
+	
 
 void Map::setNoiseMap()
 {
@@ -120,4 +154,64 @@ void Map::reset(int a, int b, int c)
 	setNoiseMap();
 	setHeightMap();
 	setDisplayList();
+}
+
+GLuint* Map::choseTexture(float a)
+{
+		case texture:
+			
+			if(a < 1)
+			{
+				return *wxGetApp().getTexture("res/water.jpg");
+			}else if(a < 1.4)
+			{
+				return *wxGetApp().getTexture("res/sand.jpg");
+			}else if(a < 5)
+			{
+				return *wxGetApp().getTexture("res/grass.jpg");
+			}else if(a < 7)
+			{
+				return *wxGetApp().getTexture("res/rock.jpg");
+			}else if(a < 10)
+			{
+				return *wxGetApp().getTexture("res/mountain.jpg");
+			}else if(a <= 12)
+			{
+				return *wxGetApp().getTexture("res/snow.jpg");
+			}else{
+				cerr << "You fucked up with the max of heightmap" << endl;
+			}
+			
+		break;
+		
+}
+
+void Map::choseColor(float a)
+{
+		case texture:
+			
+			if(a < 1)
+			{
+				glColor3ub(255,255,255);
+			}else if(a < 1.4)
+			{
+				glColor3ub(255,255,255);
+			}else if(a < 5)
+			{
+				glColor3ub(255,255,255);
+			}else if(a < 7)
+			{
+				glColor3ub(255,255,255);
+			}else if(a < 10)
+			{
+				glColor3ub(255,255,255);
+			}else if(a <= 12)
+			{
+				glColor3ub(255,255,255);
+			}else{
+				cerr << "You fucked up with the max of heightmap" << endl;
+			}
+			
+		break;
+		
 }

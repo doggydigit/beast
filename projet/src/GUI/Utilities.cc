@@ -99,7 +99,7 @@ void Utilities::GLTextureFromElevations(utils::NoiseMap& heights, GLuint& textur
 	{
 		for (int y(0); y<heightmapSize; y++)
 		{
-			const utils::Color* color(image.GetConstSlabPtr(x,y));
+			const utils::Color* color(image.GetConstSlabPtr(x,y));7
 			imagedata[i]=color->red;
 			imagedata[i+1]=color->green;
 			imagedata[i+2]=color->blue;
