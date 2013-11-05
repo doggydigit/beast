@@ -4,7 +4,7 @@
 Flowers::Flowers(Position P, int N(1000)): pos(P), quant_nect(N)
     {
 	//initialisation de ObjLoader
-	if (!ol.hasLoaded()) ol.load("res/flower.obj");
+	if (!ol.hasLoaded()) ol.load("../../res/flower.obj");
 	cout<<"hello sweetie"<<endl;
     }
 Flowers::~Flowers()
