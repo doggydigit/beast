@@ -21,6 +21,7 @@ public:
 	void setTaillePlan(int a);
 	void setTaillPerlin(int a);
 	void setResolution(int a);
+	void setCases();
 	
 	void reset(int a =50, int b = 512, int c = 1);
 
@@ -32,6 +33,7 @@ private:
 	int taillePlan;
 	int taillePerlin;
 	int resolution;
+	int cases;
 	
 	vector<vector<*float>> heightMap;
 	

@@ -3,6 +3,7 @@
 Map::Map(int a,int b, int c): taillePlan(a), taillePerlin(b), resolution(c)
 {
 	displayList=glGenLists(1);
+	setCases();
 	setNoiseMap();
 	setHeightMap();
 	setDisplayList();
@@ -28,6 +29,24 @@ void Map::draw()
 void Map::setDisplayList()
 {
 	glNewList(displayList, GL_Compile);
+	
+		glBegin(GL_QUADS);
+		
+		int y[cases0];
+		for(int i(0); i < cases; ++i)
+		{
+			int y[i] = i*resolution
+		for(int i(0); i < cases; ++i)
+		{
+			int x = i*resolution;
+			for(int j(0); j < cases; ++j)
+			{
+				VecnD c(x,y[i], heightMap[i][j]);
+				Utilities::drawCube(c, resolution, 4);
+			}
+		}
+		Utilities::GLTextureFromElevations(heightMap, 
+		glEnd();
 		
 	glEndList();
 }
@@ -48,7 +67,7 @@ void Map::setNoiseMap()
 	mapBuilder.SetDestNoiseMap(noiseMap);
     
         // on indique la taille de la noiseMap
-	mapBuilder.SetDestSize(taille, taille);
+	mapBuilder.SetDestSize(cases, cases);
  
         // on indique dans quelles limites physiques le créateur de map
         // va travailler pour  créer la noiseMap (vous pourrez garder les
@@ -62,11 +81,11 @@ void Map::setNoiseMap()
 void Map::setHeightMap()
 {
 	heightMap.clear;
-	vector<double> x(taillePlan);
-	heightMap.assign(taillePlan, x);
-	for(int i(0); i < taillePlan; ++i)
+	vector<double> x(cases);
+	heightMap.assign(cases, x);
+	for(int i(0); i < cases; ++i)
 	{
-		for(int j(0); j < taillePlan; ++j)
+		for(int j(0); j < cases; ++j)
 		{
 			heightMap[i][j] = noiseMap.GetConstSlabPtr(i,j);
 		}
@@ -86,6 +105,11 @@ void Map::setTaillPerlin(int a)
 void Map::setResolution(int a)
 {
 	resolution = a;
+}
+
+void Map::setCases()
+{
+	cases = tailleplan/resolution;
 }
 
 void Map::reset(int a, int b, int c)
