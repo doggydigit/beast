@@ -1,9 +1,13 @@
 #ifndef FLOWERS_H
 #define FLOWERS_H
 
+#include "../VecnD/VecnD.h"
+#include "../Positionnable/Positionnable.h"
+#include "../GUI/Dessinable.h"
+
 using namespace std;
 
-class Flowers
+class Flowers : public Dessinable, Positionnable 	//vérifier
 {
     public :
 	//getters
