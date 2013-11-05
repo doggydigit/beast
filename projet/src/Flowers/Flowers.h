@@ -4,6 +4,7 @@
 #include "../VecnD/VecnD.h"
 #include "../Positionnable/Positionnable.h"
 #include "../GUI/Dessinable.h"
+#include "../ObjLoader/ObjLoader.h"
 
 using namespace std;
 
@@ -21,12 +22,19 @@ class Flowers : public Dessinable, Positionnable 	//vérifier
 	//function : gather pollen
 	int GatherNec(int m);
 
+	//Dessine
+	void dessine(wxPaintEvent& event);
+
     private :
 	//position
 	Position pos;
 	
 	//quantité nectar
 	int quant_nect;
+
+	//ObjectLoader
+	ObjectLoader o1;
+
 
 };
 #endif
