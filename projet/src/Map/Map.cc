@@ -192,22 +192,22 @@ void Map::choseColor(float a)
 			
 			if(a < 1)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(0,0,255);
 			}else if(a < 1.4)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(240,240,60);
 			}else if(a < 5)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(32,160,0);
 			}else if(a < 7)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(128,128,128);
 			}else if(a < 10)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(100,200,0);
 			}else if(a <= 12)
 			{
-				glColor3ub(255,255,255);
+				glColor3ub(200,200,200);
 			}else{
 				cerr << "You fucked up with the max of heightmap" << endl;
 			}
