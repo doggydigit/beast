@@ -12,28 +12,28 @@ class Flowers : public Dessinable, Positionnable 	//vérifier
 {
     public :
 	//constructor, destructor
-	Flowers(Position P, int N);
+	Flowers(const Positionnable *p, int n=1000);
 	~Flowers();
 
 	//getters
-	Position getPos();
+	Positionnable getPos();
 	int getQuantNec();
 
 	//function : gather pollen
-	int GatherNec(int m);
+	int GatherNec(int);
 
 	//Dessine
 	void dessine(wxPaintEvent& event);
 
     private :
 	//position
-	Position pos;
+	Positionnable pos;
 	
 	//quantité nectar
 	int quant_nect;
 
 	//ObjectLoader
-	ObjectLoader o1;
+	ObjLoader o1;
 
 
 };

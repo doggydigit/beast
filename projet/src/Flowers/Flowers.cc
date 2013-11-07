@@ -1,7 +1,8 @@
 #include "Flowers.h"
 
 //constructor/destructor
-Flowers::Flowers(Position P, int N(1000)): pos(P), quant_nect(N)
+Flowers::Flowers(const Positionnable *p, int n)
+: pos(*p), quant_nect(n)
     {
 	//initialisation de ObjLoader
 	if (!ol.hasLoaded()) ol.load("../../res/flower.obj");
@@ -13,7 +14,7 @@ Flowers::~Flowers()
     }
 
 //getters
-Position Flowers::getPos()
+Positionnable Flowers::getPos()
     {
 	return pos;
     }

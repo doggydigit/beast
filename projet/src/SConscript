@@ -39,3 +39,5 @@ addTarget("graphicTest", parts+[Application])
 Random=Glob("tests/exemple-test-textuel.cc")
 addTarget("textualTest", RandomGenerator+[Random, Matrix33])
 
+Random=Glob("tests/test1.cc")
+addTarget("test1", parts+[Application])
