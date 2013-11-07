@@ -1,30 +1,42 @@
 #include "Map.h"
 #include "../GUI/Application.h"
+#include "../VecnD/VecnD.h"
 
 Map::Map(int a,int b, int c, mode t, mode d): taillePlan(a), taillePerlin(b), resolution(c), TexMode(t), DrawMode(d)
 {
-	displayList=glGenLists(1);
+	if (!hasStored()) 
+	{
+	   setDisplayList();
+        } else drawStored();
 	setCases();
 	setNoiseMap();
 	setHeightMap();
-	setDisplayList();
+	if (!hasStored()) 
+	{
+	   setDisplayList();
+	} //else drawStored();
+	//setDisplayList();
 }
 
 Map::~Map()
 {
-	glDeleteLists(displayList, 1);
+	//glDeleteLists(displayList, 1);
 }
 
 void Map::draw()
 {
-	switch(mode)
+	switch(TexMode)
 	{
 		case texture:
 
 			break;
 		
 		case color:
-	
+			if (!hasStored()) 
+			{
+				setDisplayList();
+			} else drawStored();
+			/*
 			glColor3ub(255,255,255);
 			glEnable(GL_TEXTURE_2D);
 			// texture est un GLuint
@@ -32,7 +44,8 @@ void Map::draw()
 			
 			// dessin du plan ici
 			
-			glDisable(GL_TEXTURE_2D);
+			glDisable(GL_TEXTURE_2D);*/
+		}
 }
 
 void Map::setDisplayList()
@@ -40,48 +53,54 @@ void Map::setDisplayList()
 	switch(DrawMode)
 	{
 		case landscape:
-	
-			glNewList(displayList, GL_Compile);
+
+			beginStore();
+			//glNewList(displayList, GL_Compile);
 			glColor3ub(255,255,255);
 			glEnable(GL_TEXTURE_2D);
 			
 				//glBegin(GL_QUADS);
 				
-				int y[cases0];
+				int y[cases];
 				for(int i(0); i < cases; ++i)
 				{
-					int y[i] = i*resolution
+					y[i] = i*resolution;
+				}
 					for(int i(0); i < cases; ++i)
 					{
 						int x = i*resolution;
 						for(int j(0); j < cases; ++j)
 						{
-							VecnD c(x,y[i], heightMap[i][j]);
+							VecnD<double> c;
+							c[1]=x;
+							c[2]=y[i];
+							c[3]=heightMap[i][j];
+							//(x,y[i], heightMap[i][j]);
 							switch (TexMode)
 							{
 								case texture:
 									glColor3ub(255,255,255);
-									glBindTexture(GL_TEXTURE_2D, choseTexture(*heightMap[i][j]));
+									glBindTexture(GL_TEXTURE_2D, choseTexture(heightMap[i][j]));
 								break;
 									
 								case color:
-									choseColor(*heightMap[i][j]);
+									choseColor(heightMap[i][j]);
 								break;
 							}
 							Utilities::drawCube(c, resolution, 4);
 						}
 					}
-				}
 				//glEnd();
-			VecnD big(taillePlan/2, taillePlan/2, -taillePlan/2);
+			VecnD<double> big(taillePlan/2, taillePlan/2, -taillePlan/2);
 			Utilities::drawCube(big, taillePlan * 1.1, 1);
-			glEndList();
-		
+			glDisable(GL_TEXTURE_2D);
+			//glEndList();
+			endStore();
 			break;
 			
-		case pixel:
+		/*case pixel:
 			//idsasfhergbhe34ht79133eqhg
-		break;
+		break;*/
 	}
 }
 	
@@ -115,14 +134,14 @@ void Map::setNoiseMap()
 
 void Map::setHeightMap()
 {
-	heightMap.clear;
-	vector<double> x(cases);
+	heightMap.clear();
+	vector<float> x(cases);
 	heightMap.assign(cases, x);
 	for(int i(0); i < cases; ++i)
 	{
 		for(int j(0); j < cases; ++j)
 		{
-			heightMap[i][j] = noiseMap.GetConstSlabPtr(i,j);
+			heightMap[i][j] = *noiseMap.GetConstSlabPtr(i,j);
 		}
 	}
 }
@@ -144,7 +163,7 @@ void Map::setResolution(int a)
 
 void Map::setCases()
 {
-	cases = tailleplan/resolution;
+	cases = taillePlan/resolution;
 }
 
 void Map::reset(int a, int b, int c)
@@ -157,7 +176,7 @@ void Map::reset(int a, int b, int c)
 	setDisplayList();
 }
 
-GLuint* Map::choseTexture(float a)
+GLuint Map::choseTexture(float a)
 {		
 		if(a < 1)
 		{
@@ -179,7 +198,7 @@ GLuint* Map::choseTexture(float a)
 			return *wxGetApp().getTexture("res/snow.jpg");
 		}else{
 			cerr << "You fucked up with the max of heightmap" << endl;
-			GLuint* wtf;
+			GLuint wtf;
 			return wtf;
 		}	
 }

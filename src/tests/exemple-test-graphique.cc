@@ -2,6 +2,7 @@
 
 void init(Application* app)
 {
+	
 	// Ici on peutr par exemple créer une ruche et l'ajouter au terrain
 	//Hive* h(new Hive(...);
 	//wxGetApp().getMap()->addHive(h);

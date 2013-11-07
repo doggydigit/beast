@@ -6,6 +6,7 @@
 #include <libnoise/noise.h>
 #include "../GUI/wxIncludes"
 #include <vector>
+#include "../GUI/Utilities.h"
 //#include <iostream>
 //#include <cstdlib>
 using namespace std;
@@ -35,16 +36,17 @@ public:
 	
 private:
 	
-	GLuint* choseTexture(unsigned int i, unsigned int j);
+	GLuint choseTexture(float a);
+	void choseColor(float a);
 		
-	Gluint displayList;
+	//GLuint displayList;
 	
 	int taillePlan;
 	int taillePerlin;
 	int resolution;
 	int cases;
 	
-	vector<vector<*float>> heightMap;
+	vector<vector<float>> heightMap;
 	
 	// déclaration de la noiseMap que l'on veut construire
     // appelée ici myNoiseMap:
