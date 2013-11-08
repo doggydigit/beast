@@ -1,0 +1,41 @@
+import os
+
+###CECI EST UNE COQUILLE  DE SCONSCRIPT A ADAPTER A VOS BESOINS
+def addTarget(name, srcs, a=0):
+	env.Alias(name, env.Program(target = os.path.join("../bin/", name), source = srcs), a)
+
+env = Environment(CXXFLAGS = "-g -std=c++0x")
+
+env["CXX"] = "g++-4.7"
+
+env.ParseConfig('wx-config --cxxflags --libs gl,core,base')
+
+env.Append(LIBS=['GL','GLU','noise', 'glut'])
+
+#env.Append(LIBS=['boost_propertytree'])
+
+#Parties
+## A COMPLETER
+GUI=Glob('GUI/*.cc')
+RandomGenerator=Glob("RandomGenerator/*.cc")
+Matrix33=Glob("Matrix33/*.cc")
+ObjLoader=Glob("ObjLoader/*.cc")
+Positionnable=Glob("Positionnable/*.cc")
+DiffEqSolver=Glob("DiffEqSolver/*.cc")
+VecnD=Glob("VecnD/*.cc")
+ParamsHandler=Glob("ParamsHandler/*.cc")
+Map=Glob("Map/*.cc")
+
+# A COMPLETER
+parts=[DiffEqSolver, GUI, RandomGenerator, Matrix33, ObjLoader, Positionnable, ParamsHandler, Map]
+
+#Cibles
+# Definit des cibles: permet de lancer scons avec pour cible un test particulier
+#par exemple :  scons graphicTest
+
+Application=Glob("tests/exemple-test-graphique.cc")
+addTarget("graphicTest", parts+[Application])
+
+Random=Glob("tests/exemple-test-textuel.cc")
+addTarget("textualTest", RandomGenerator+[Random, Matrix33])
+
